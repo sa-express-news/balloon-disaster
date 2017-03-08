@@ -71,6 +71,11 @@ export default class Video extends Media {
     }
   }
 
+  buildMaxheight() {
+    const maxHeight = this._placement === 'background' ? $(window).height() : $(window).height() - 50;
+    return 'max-height: ' + maxHeight + 'px;';
+  }
+
   render(params) {
     var output = '';
 
@@ -87,7 +92,8 @@ export default class Video extends Media {
         videoId: this.id,
         caption: this._video.caption,
         placeholder: i18n.viewer.media.captionPlaceholder,
-        captionEditable: app.isInBuilder
+        captionEditable: app.isInBuilder,
+        style: this.buildMaxheight()
       });
     }
     else if (this._placement == 'background') {
@@ -194,7 +200,7 @@ export default class Video extends Media {
         domId: 'player-' + this._domID,
         classes: classes + ' initialized',
         url: 'https://player.vimeo.com/video/' + this._videoid + '?api=1&background=' + opt + '&player_id=player-' + this._domID,
-        options: this._video.options,
+        options: this.buildMaxheight(),
         playerControls: controls
       }));
 

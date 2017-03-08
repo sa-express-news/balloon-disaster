@@ -255,8 +255,11 @@ class UrlContainer extends React.Component {
       if (this.checkSingleMediaType('WEBPAGE')) {
         if (addr.indexOf('http:\/\/') !== 0 && addr.indexOf('https:\/\/') !== 0 && addr.indexOf('\/\/') !== 0) {
           addr = addr.indexOf('<script') === 0 ? addr : '//' + addr;
+          this.publishSelection({type: 'webpage', url: addr, isScript: true});
         }
-        this.publishSelection({type: 'webpage', url: addr, isScript: true});
+        else {
+          this.publishSelection({type: 'webpage', url: addr});
+        }
       }
       else {
         var errorTextArr = [];

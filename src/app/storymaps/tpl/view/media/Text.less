@@ -1,3 +1,5 @@
+@import "../../core/Mixins";
+
 h1 {
   font-size: 36px;
   line-height: 54px;
@@ -28,6 +30,41 @@ body.builder-mode blockquote.block, {
 
 body.builder-mode h2.block {
   min-height: 32px;
+}
+
+div.editorsBlock {
+  float: right;
+  display: inline-block;
+  width: 20%;
+  border-left: 1px solid #666;
+  margin: 30px 10% 30px 1%;
+  padding: 20px 8px;
+  border-radius: 8px;
+  background: #fefdfb;
+
+  @media @mobile {
+    width: 96%;
+    float: none;
+    border-right: 1px solid #666;
+    margin: 30px 2% 0;
+  }
+
+  p, p.block {
+    width: 100%;
+    text-align: center;
+    min-height: 0;
+    line-height: 136%;
+    font-size: 16px;
+    color: black;
+
+    &.title {
+      text-decoration: underline;
+    }
+
+    a {
+      color: #000066;
+    }
+  }
 }
 
 

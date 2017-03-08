@@ -1,4 +1,7 @@
 import {} from 'lib-build/less!./Text';
+import editorBlock from 'lib-build/hbars!./TextEditorBlock';
+
+let isFirst = true;
 
 // TODO extends Media
 export default class Text {
@@ -26,6 +29,12 @@ export default class Text {
       return null;
     }
 
+    if (isFirst) {
+      isFirst = !isFirst;
+      return editorBlock({
+        text: /<p class="block">(.*?)<\/p>/.exec(this._text.value)[1]
+      });
+    }
     return this._text.value;
   }
 

@@ -77,7 +77,24 @@
   </head>
   <body>
     <style>
-      /* CUSTOM CSS RULES */
+      .story-header .part-two {
+        display: flex;
+        align-items: center;
+        flex: 0 0 auto;
+        color: #CECECE;
+      }
+
+      .story-header .part-two a {
+        color: #CECECE;
+      }
+
+      .story-header.compact .part-two {
+        text-shadow: 0 0 8px #000;
+      }
+
+      .story-header.compact .part-two a {
+        color: #FFF;
+      }
     </style>
 
     <div class="story-header compact">
@@ -90,6 +107,7 @@
         <span class="title strong"></span>
       </div>
       <ul class="bookmarks"></ul>
+      <div class="part-two"><a href="#" target="_blank">Read Part II of 'Adrift'</a> |&nbsp;</div>
       <div class="share">
         <button class="btn btn-sm btn-primary header-edit-button"></button>
         <span class="linkContainer"></span>
