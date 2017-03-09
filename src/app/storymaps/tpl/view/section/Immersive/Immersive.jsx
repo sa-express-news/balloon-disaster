@@ -113,11 +113,15 @@ export default class Immersive {
       credits = options.credits;
     }
 
-    for(let view of views) {
+    var filteredViews = views.filter((view, idx) => { // hack that filters out certain slides for mobile vs desktop
+      const skipped = UIUtils.isMobileBrowser() ? 3 : 2;
+      return idx !== skipped;
+    });
+
+    filteredViews.forEach(view => {
       //
       // Background
       //
-
       var isMediaAlreadyLoaded = this.isMediaAlreadyLoaded(view.background);
 
       // A new media is created for every view even if the media is used multiple times
@@ -158,7 +162,7 @@ export default class Immersive {
       //
 
       this._transitions.push(view.transition);
-    }
+    });
 
     return viewTpl({
       classes: ['section', 'section-immersive'].concat(config).join(' '),
