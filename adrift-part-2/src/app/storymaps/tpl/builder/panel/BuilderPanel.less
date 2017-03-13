@@ -1,0 +1,304 @@
+@import "../../core/Variables";
+
+.section-builder-panel {
+  display: none;
+}
+
+.beta-feedback {
+  position: absolute;
+  top: 57px;
+  right: 5px;
+  color: #666;
+  z-index: 1;
+  font-size: 14px;
+}
+
+body.builder-mode .section-builder-panel {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 250px;
+  height: 100%;
+
+  border-right: 1px solid #CCC;
+  z-index: 9;
+}
+
+.section-builder-panel {
+  background: #656565;
+
+  .btn {
+    outline: none !important;
+  }
+
+  .btn:focus:not(:hover) {
+    color: inherit;
+  }
+
+  /*
+   * Top buttons
+   */
+
+  .builder-buttons {
+    background: #444444;
+
+    .btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+
+    .btn.not-clickable {
+      cursor: default;
+
+      &:hover {
+        color: inherit !important;
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: none;
+        color: inherit !important;
+      }
+    }
+
+    .btn-save {
+      .btn-save-loader,
+      .btn-save-success,
+      .btn-save-error {
+        display: none;
+      }
+
+      &.saving {
+        .btn-save-loader {
+          display: inline-block;
+          margin-left: 1px;
+        }
+      }
+
+      &.saved {
+        .btn-save-success {
+          display: inline-block;
+          margin-left: 7px;
+        }
+      }
+
+      &.error {
+        color: @sm-danger-text;
+
+        .btn-save-error {
+          display: inline-block;
+        }
+      }
+
+      &.saving, &.saved, &.error {
+        opacity: 0.95;
+
+        .btn-save-icon {
+          display: none;
+        }
+      }
+
+      .btn-save-label {
+        margin-left: 10px;
+      }
+    }
+
+    // ----- Settings ----- //
+
+    .btn-settings {
+      .btn-settings-label {
+        margin-left: 15px;
+      }
+    }
+    /*
+     * Share
+     */
+
+    .btn-share {
+      position: relative;
+
+      &.disabled {
+        cursor: not-allowed;
+      }
+
+      .btn-share-container {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        font-size: 2.4rem;
+        border: 1px solid #C1CCD2;
+        margin-left: 5px;
+        display: flex;
+
+        &.disabled {
+          pointer-events: none;
+          cursor: default;
+          opacity: 0.5;
+        }
+
+        .btn-share-outer-tooltip {
+          display: flex;
+          flex: 1 1 auto;
+        }
+
+        .btn-share-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 35px;
+          height: 30px;
+          flex: 1 1 auto;
+          text-align: center;
+          color: @link-color;
+          border-right: 1px solid #C1CCD2;
+          cursor: pointer;
+
+          &:nth-last-child(1) {
+            border-right: none;
+          }
+
+          &:hover {
+            color: @link-hover-color;
+          }
+
+          &.active {
+            background: @link-color;
+            color: white;
+          }
+
+          .small-loader {
+            display: none;
+          }
+
+          .share-icon {
+            font-size: 20px;
+          }
+
+          &.sharing {
+            .small-loader {
+              display: inline-block;
+            }
+
+            .share-icon {
+              display: none;
+            }
+          }
+        }
+      }
+
+      .btn-share-label {
+        margin-left: 12px;
+      }
+    }
+
+    // ----- preview ----- //
+
+    .btn-preview {
+      .btn-preview-label {
+        margin-left: 12px;
+      }
+    }
+    // ----- story health ----- //
+
+    .btn-check {
+      cursor: default;
+
+      .checking-icon-wrapper,
+      .issue-icon-wrapper,
+      .no-issues-icon-wrapper {
+        display: none;
+      }
+
+      .super {
+        font-size: 0.7em;
+        vertical-align: super;
+        margin-left: -4px;
+        font-weight: bold;
+      }
+
+      .tooltip {
+        min-width: 0 !important;
+      }
+
+      .issue-icon-wrapper {
+        color: @sm-danger-text;
+      }
+
+      .fa-check {
+        color: @brand-success;
+      }
+
+      .btn-check-label {
+        position: absolute;
+        left: 50px;
+      }
+
+      .check-tooltip,
+      .my-stories-link {
+        cursor: pointer;
+        margin-left: 6px;
+        color: #666;
+        font-size: 14px
+      }
+      // visibility changing
+
+      &.checking {
+        .checking-icon-wrapper {
+          display: inline-block;
+        }
+      }
+
+      &.errors {
+        .issue-icon-wrapper {
+          display: inline-block;
+        }
+      }
+
+      &.no-issues {
+        .no-issues-icon-wrapper {
+          display: inline-block;
+        }
+      }
+
+    }
+  }
+
+  .tooltip {
+    &:not(.share-tooltip) {
+      min-width: 200px;
+
+      .tooltip-inner {
+        box-shadow: 0 0 2px 0 white;
+      }
+    }
+
+    &.in {
+      opacity: 1;
+    }
+
+    .tooltip-inner {
+      line-height: 1.3;
+    }
+
+    &.custom-warning {
+      width: 300px;
+
+      .tooltip-inner {
+        max-width: 300px;
+      }
+    }
+  }
+
+  /*
+   * Overview
+   */
+
+  .overview {
+    display: flex;
+    flex: 1;
+  }
+}

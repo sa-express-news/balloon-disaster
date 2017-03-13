@@ -1,0 +1,85 @@
+.section-layout-title {
+
+  .foreground {
+    .title-text {
+      outline: none;
+      border: 2px solid transparent;
+
+      &:hover:not(:focus) {
+        border: 2px solid rgba(241, 248, 253, 0.14);
+      }
+
+      &[contenteditable=true]:empty {
+        border: 1px dashed #AAA;
+        width: 400px;
+        margin: auto;
+        color: #DDD;
+        border: 2px solid rgba(241, 248, 253, 0.14);
+      }
+
+      &[contenteditable=true]:not(:focus):empty:before{
+        display: block;
+        content: attr(placeholder);
+      }
+
+      &.text-dark {
+        &:hover:not(:focus) {
+          border: 2px solid rgba(15,15,15, 0.14);
+        }
+
+        &[contenteditable=true]:empty {
+          border: 1px dashed #666;
+          color: #555;
+          border: 2px solid rgba(15,15,15, 0.14);
+        }
+      }
+    }
+  }
+
+  /* customize media-empty invite */
+  .media-empty-add {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+
+    .media-empty-image {
+      height: 25px;
+    }
+
+    .media-empty-label {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  .media-cfg-panel {
+    position: absolute;
+    bottom: -225px;
+    left: 0;
+
+    .builder-config {
+      background-color: #FFF;
+
+      .builder-config-section {
+        .section-content.horizontal {
+          .config-item[data-type="style"] {
+            margin-bottom: 20px;
+          }
+        }
+      }
+    }
+  }
+
+
+  .config-panel-active .media-cfg-panel .builder-config {
+    height: 225px;
+  }
+
+  &.media-config-active {
+    z-index: 501;
+
+    .background {
+      overflow: visible;
+    }
+  }
+}
