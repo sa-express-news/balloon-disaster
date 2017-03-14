@@ -3,6 +3,7 @@ import Media from './Media';
 import {} from 'lib-build/less!./WebPage';
 import viewBlock from 'lib-build/hbars!./WebPageBlock';
 import scriptBlock from 'lib-build/hbars!./WebPageScript';
+import infogramBlock from 'lib-build/hbars!./WebPageInfogram';
 import viewBackground from 'lib-build/hbars!./WebPageBackground';
 
 import i18n from 'lib-build/i18n!resources/tpl/viewer/nls/app';
@@ -26,6 +27,7 @@ export default class WebPage extends Media {
     this._webpage = webpage;
     this._url = webpage.url;
     this._isScript = !!webpage.isScript;
+    this._isInfogram = !!webpage.isInfogram;
 
     this._nodeMedia = null;
     this._placement = null;
@@ -61,6 +63,23 @@ export default class WebPage extends Media {
     });
   }
 
+  buildInfogramBlock() {
+    // this is a straight up hacktastrophe that allows me to inject scripts into
+    // the content blocks
+    const dataId = this._url.match(/data-id=['"][^'"]+/g)[0].split('="')[1];
+    const dataTitle = this._url.match(/data-title=['"][^'"]+/g)[0].split('="')[1];
+    return infogramBlock({
+      dataId,
+      dataTitle,
+      id: this._domID,
+      caption: this._webpage.caption,
+      placeholder: i18n.viewer.media.captionPlaceholder,
+      captionEditable: app.isInBuilder,
+      labelExploreStart: i18n.viewer.media.explore,
+      labelExploreStop: i18n.viewer.media.exploreStop
+    });
+  }
+
   render(context) {
     var output = '';
 
@@ -74,6 +93,9 @@ export default class WebPage extends Media {
     if (this._isScript) {
       output += this.buildScriptBlock();
     } 
+    else if (this._isInfogram) {
+      output += this.buildInfogramBlock();
+    }
     else if (this._placement == 'block') {
       output += viewBlock({
         id: this._domID,

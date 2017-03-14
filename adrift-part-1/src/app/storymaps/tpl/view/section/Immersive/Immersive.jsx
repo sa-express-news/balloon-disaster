@@ -114,6 +114,9 @@ export default class Immersive {
     }
 
     var filteredViews = views.filter((view, idx) => { // hack that filters out certain slides for mobile vs desktop
+      if (app.isInBuilder) {
+        return true;
+      }
       const skipped = UIUtils.isMobileBrowser() ? 3 : 2;
       return idx !== skipped;
     });
